@@ -39,23 +39,33 @@ Edit the configuration file to adjust settings such as network interface and rul
 ```bash 
 sudo nano /etc/suricata/suricata.yaml
 ```
-Modify the HOME_NET variable to your local network, e.g., 192.168.1.0/24.
-Set the network interface under the af-packet section that Suricata should monitor.
+- Modify the HOME_NET variable to your local network, e.g., 192.168.1.0/24.
+- Set the network interface under the af-packet section that Suricata should monitor. Use `ctrl+w` to search for `af-packet`.
 
-4. **Run Suricata in IDS**: 
+4. To test the configuration to make sure everything is set up correctly:
+```bash
+sudo suricata -T -c /etc/suricata/suricata.yaml
+```
+    
+5. **Run Suricata in IDS**: 
 ```bash
 sudo suricata -c /etc/suricata/suricata.yaml -i wlan0
 ``` 
 Replace `eth0` with the network interface you want to monitor 
 
-5. **Monitor logs**: 
-Check the logs such as `fast.log` to see the detected network events. 
-
+6. **Monitor logs**: 
+Check the logs such as `fast.log` to see the detected network events.
+```bash
+tail -f /var/log/suricata/fast.log
+```
 
 ### Configuring the Splunk Forwarder
 
 1. **Place Configuration Files**:
 Copy `inputs.conf` and `outputs.conf` into your Splunk Forwarder's `$SPLUNK_HOME/etc/system/local/` directory.
+```bash
+/opt/splunkforwarder/etc/system/local
+```
 
 2. **Modify `outputs.conf`**:
 Replace `<indexer_ip>` with the IP address of your Splunk indexer.
