@@ -44,7 +44,7 @@ Set the network interface under the af-packet section that Suricata should monit
 
 4. **Run Suricata in IDS**: 
 ```bash
-sudo suricata -c /etc/suricata/suricata.yaml -i eth0
+sudo suricata -c /etc/suricata/suricata.yaml -i wlan0
 ``` 
 Replace `eth0` with the network interface you want to monitor 
 
